@@ -11,7 +11,7 @@ WordPress package to enable a controller when using Timber/Twig with [Sage 9](ht
 Browse into the Sage theme directory and run;
 
 ```shell
-$ composer require itcig/sagecontroller
+$ composer require itcig/sagecontroller:9.0.0-beta.4
 ```
 
 #### Requirements:
