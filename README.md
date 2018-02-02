@@ -1,6 +1,6 @@
 # Controller
 
-WordPress package to enable a controller when using Blade with [Sage 9](https://roots.io/sage/).
+WordPress package to enable a controller when using Timber/Twig with [Sage 9](https://roots.io/sage/). This also requires heavy modification of Sage 9 to use.
 
 ## Installation
 
@@ -11,7 +11,7 @@ WordPress package to enable a controller when using Blade with [Sage 9](https://
 Browse into the Sage theme directory and run;
 
 ```shell
-$ composer require soberwp/controller:9.0.0-beta.3
+$ composer require itcig/sagecontroller
 ```
 
 #### Requirements:
@@ -37,19 +37,19 @@ The controller will autoload PHP files within the above path and its subdirector
 #### Creating a basic Controller:
 
 * Controller files follow the same hierarchy as WordPress.
-    * You can view the controller hierarchy by using the Blade directive `@debug('hierarchy')`.
+    <!--* You can view the controller hierarchy by using the Twig directive `@debug('hierarchy')`.-->
 * Extend the Controller Class&mdash; it is recommended that the class name matches the filename.
 * Create methods within the Controller Class;
-    * Use `public function` to expose the returned values to the Blade views/s.
-    * Use `public static function` to use the function within your Blade view/s.
+    * Use `public function` to expose the returned values to the Twig views/s.
+    * Use `public static function` to use the function within your Twig view/s.
     * Use `protected function` for internal controller methods as only public methods are exposed to the view. You can run them within `__construct`.
-* Return a value from the public methods which will be passed onto the Blade view.
-    * **Important:** The method name is converted to snake case and becomes the variable name in the Blade view.
+* Return a value from the public methods which will be passed onto the Twig view.
+    * **Important:** The method name is converted to snake case and becomes the variable name in the Twig view.
     * **Important:** If the same method name is declared twice, the latest instance will override the previous.
 
 #### Examples:
 
-The following example will expose `$images` to `resources/views/single.blade.php`
+The following example will expose `$images` to `resources/views/single.twig`
 
 **app/controllers/Single.php**
 
@@ -58,7 +58,7 @@ The following example will expose `$images` to `resources/views/single.blade.php
 
 namespace App;
 
-use Sober\Controller\Controller;
+use Cig\Sage\Controller\Controller;
 
 class Single extends Controller
 {
@@ -74,16 +74,16 @@ class Single extends Controller
 }
 ```
 
-**resources/views/single.blade.php**
+**resources/views/single.twig**
 
 ```php
-@if($images)
+{% if(images|length) %}
   <ul>
-    @foreach($images as $image)
-      <li><img src="{{$image['sizes']['thumbnail']}}" alt="{{$image['alt']}}"></li>
-    @endforeach
+    {% for image in images %}
+      <li><img src="{{ image.sizes.thumbnail }}" alt="{{ image.alt }}"></li>
+    {% endfor %}
   </ul>
-@endif
+{% endif %}
 ```
 
 #### Creating Components;
@@ -115,7 +115,7 @@ You can now include the Images trait into any view to pass on variable $images;
 
 namespace App;
 
-use Sober\Controller\Controller;
+use Cig\Sage\Controller\Controller;
 
 class Single extends Controller
 {
@@ -125,9 +125,9 @@ class Single extends Controller
 
 #### Using Static Methods;
 
-You can use static methods to return content from your controller.
+You can use static methods as a pass-thru method that returns content from your controller.
 
-This is useful if you are within the loop and want to return data for each post item individually.
+This is useful if you are within the loop and want to return data for each post item individually by passing in a $post_id.
 
 **app/controllers/Archive.php**
 
@@ -136,13 +136,13 @@ This is useful if you are within the loop and want to return data for each post 
 
 namespace App;
 
-use Sober\Controller\Controller;
+use Cig\Sage\Controller\Controller;
 
 class Archive extends Controller
 {
-    public static function title()
+    public static function callback_method($arg = null)
     {
-        return get_post()->post_title;
+        return my_callback($arg);
     }
 }
 ```
@@ -150,15 +150,11 @@ class Archive extends Controller
 **resources/views/archive.php**
 
 ```php
-@extends('layouts.app')
+{% extends "base.twig" %}
 
-@section('content')
-
-  @while (have_posts()) @php(the_post())
-    {{ Archive::title() }}
-  @endwhile
-
-@endsection
+{% block content %}
+	{{ callback_method() }}
+{% endblock %}
 ```
 
 #### Inheriting the Tree/Heirarchy;
@@ -176,8 +172,8 @@ For example, the following `app/controllers/Single.php` example will inherit met
 
 namespace App;
 
-use Sober\Controller\Controller;
-use Sober\Controller\Module\Tree;
+use Cig\Sage\Controller\Controller;
+use Cig\Sage\Controller\Module\Tree;
 
 class Single extends Controller implements Tree
 {
@@ -192,7 +188,7 @@ If you prefer you can also do this;
 
 namespace App;
 
-use Sober\Controller\Controller;
+use Cig\Sage\Controller\Controller;
 
 class Single extends Controller
 {
@@ -213,7 +209,7 @@ Methods created in `app/controllers/App.php` will be inherited by all views and 
 
 namespace App;
 
-use Sober\Controller\Controller;
+use Cig\Sage\Controller\Controller;
 
 class App extends Controller
 {
@@ -230,14 +226,15 @@ class App extends Controller
 protected $active = false;
 ```
 
-#### Blade Debugging;
-
+#### Twig Debugging;
+Coming soon
+<!--
 In your Blade views, `resources/views`, you can use the following to assist with debugging;
 
 * `@debug('hierarchy')` echos a list of the controller hierarchy for the current view.
 * `@debug('controller')` echos a list of variables available in the view.
 * `@debug('dump')` var_dumps a list of variables available in the view, including `$post`.
-
+-->
 ## Updates
 
 #### Composer:
@@ -256,6 +253,7 @@ Includes support for [github-updater](https://github.com/afragen/github-updater)
 * Clone [github-updater](https://github.com/afragen/github-updater) to your sites plugins/ folder
 * Activate via WordPress
 
-## Social
+## Special Thanks
 
+* Most of the leg work here was done by Daren Jacoby so show him some love
 * For Controller updates and other WordPress dev, follow [@withjacoby](https://twitter.com/withjacoby)
