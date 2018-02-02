@@ -3,7 +3,7 @@
   "type": "package",
   "license": "MIT",
   "description": "WordPress package to enable a basic controller when using Timber/Twig with Sage 9",
-  "homepage": "https://github.com/soberwp",
+  "homepage": "https://github.com/itcig",
   "authors": [
     {
       "name": "Brad Ash",
@@ -28,8 +28,8 @@
   },
   "autoload": {
     "psr-4": {
-      "Sober\\Controller\\": "src/",
-      "Sober\\Controller\\Module\\": "src/Module/"
+      "Cig\\Sage\\Controller\\": "src/",
+      "Cig\\Sage\\Controller\\Module\\": "src/Module/"
     },
     "files": [
       "controller.php"
