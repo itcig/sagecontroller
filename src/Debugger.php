@@ -17,7 +17,7 @@ class Debugger
      */
     public function __construct($data)
     {
-        $this->data = $data['__data']['__debugger'];
+        $this->data = $data['__data']['__debugger'] ?? [];
 
         $this->setData();
         $this->display();
