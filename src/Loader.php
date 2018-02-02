@@ -1,8 +1,8 @@
 <?php
 
-namespace Sober\Controller;
+namespace Cig\Sage\Controller;
 
-use Sober\Controller\Utils;
+use Cig\Sage\Controller\Utils;
 use Brain\Hierarchy\Hierarchy;
 
 class Loader
@@ -59,8 +59,8 @@ class Loader
      */
     protected function setNamespace()
     {
-        $this->namespace = (has_filter('sober/controller/namespace')
-            ? apply_filters('sober/controller/namespace', rtrim($this->namespace))
+        $this->namespace = (has_filter('sage/controller/namespace')
+            ? apply_filters('sage/controller/namespace', rtrim($this->namespace))
             : 'App\Controllers');
     }
 

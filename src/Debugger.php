@@ -1,8 +1,8 @@
 <?php
 
-namespace Sober\Controller;
+namespace Cig\Sage\Controller;
 
-use Sober\Controller\Utils;
+use Cig\Sage\Controller\Utils;
 
 class Debugger
 {

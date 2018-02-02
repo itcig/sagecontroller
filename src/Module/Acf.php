@@ -1,6 +1,6 @@
 <?php
 
-namespace Sober\Controller\Module;
+namespace Cig\Sage\Controller\Module;
 
 class Acf
 {

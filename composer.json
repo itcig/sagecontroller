@@ -1,21 +1,21 @@
 {
-  "name": "soberwp/controller",
+  "name": "itcig/sagecontroller",
   "type": "package",
   "license": "MIT",
-  "description": "WordPress package to enable a basic controller when using Blade with Sage 9",
+  "description": "WordPress package to enable a basic controller when using Timber/Twig with Sage 9",
   "homepage": "https://github.com/soberwp",
   "authors": [
     {
-      "name": "Darren Jacoby",
-      "email": "darren@jacoby.co.za",
-      "homepage": "https://github.com/darrenjacoby"
+      "name": "Brad Ash",
+      "email": "bash@capinfogroup.com",
+      "homepage": "https://github.com/itcig"
     }
   ],
   "keywords": [
     "wordpress"
   ],
   "support": {
-    "issues": "https://github.com/soberwp/controller/issues"
+    "issues": "https://github.com/itcig/sagecontroller/issues"
   },
   "require": {
     "php": ">=5.6.0",

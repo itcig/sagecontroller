@@ -1,6 +1,6 @@
 <?php
 
-namespace Sober\Controller;
+namespace Cig\Sage\Controller;
 
 class Utils
 {
