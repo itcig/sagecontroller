@@ -33,7 +33,7 @@ function loader()
 		$controller->__setParams();
 
 		// Determine template location to expose data
-		$location = 'sage/template/' . $controller->__getTemplateParam() . '-data/data';
+		$location = 'sage/template/data-' . $controller->__getTemplateParam() . '/data';
 
 		// Pass data to filter
 		add_filter($location, function ($data) use ($class, $controller) {

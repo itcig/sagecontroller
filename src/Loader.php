@@ -48,7 +48,7 @@ class Loader
 		// Set the aliases for static functions from the list of classes to run
 		$this->setClassesAlias();
 
-		// Add the -data body classes for the Blade filter
+		// Add the -data body classes for the Twig filter
 		$this->addBodyDataClasses();
 	}
 
@@ -143,7 +143,7 @@ class Loader
 			// Reverse the templates returned from $this->hierarchy
 			$templates = array_reverse($templates);
 			// Add app-data to classes array
-			$classes[] = 'app-data';
+			$classes[] = 'data-app';
 
 			foreach ($templates as $template) {
 				if (strpos($template, '.twig') || $template === 'index.php') {
@@ -152,7 +152,12 @@ class Loader
 				if ($template === 'index') {
 					$template = 'index.php';
 				}
-				$classes[] = basename(str_replace(['.twig', '.php'], '-data', $template));
+				$classes[] = 'data-' . basename(str_replace(['.twig', '.php'], '', $template));
+			}
+
+			// Special exception for Wordpress 404 template so that  we don't have a class name beginging with an integer
+			if (in_array('data-404', $classes)) {
+				$classes[] = 'data-not-found';
 			}
 
 			// Return the new body class list for WordPress
