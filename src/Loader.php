@@ -102,8 +102,16 @@ class Loader
 				continue;
 			}
 
+			// Build namespace off directory which allows for subdirectors of controllers
+			// /app/controllers -> App\Controllers\
+			// /app/controllers/subdir -> App\Controllers\Subdir\
+			$namespaceAppend = str_replace('/', '\\', ltrim(str_replace($this->path, '', pathinfo($filename, PATHINFO_DIRNAME)), '/'));
+
+			// Uppercase each directory in path
+			if (!empty($namespaceAppend)) implode('\\', array_map('ucfirst', explode('\\', $namespaceAppend)));
+
 			// Set the classes to run
-			$this->classesToRun[] = $this->namespace . '\\' . pathinfo($filename, PATHINFO_FILENAME);
+			$this->classesToRun[] = $this->namespace . ( empty($namespaceAppend) ? '' : '\\' . $namespaceAppend) . '\\' . pathinfo($filename, PATHINFO_FILENAME);
 		}
 	}
 
