@@ -65,7 +65,7 @@ class Controller
 		$this->__setDataFromPost();
 
 		// Set the data from Advanced Custom Fields to $this->data
-		//$this->__setDataFromModuleAcf();
+		$this->__setDataFromModuleAcf();
 
 		// Convert static method names to snake case and set to $this->data
 		$this->__setDataFromStaticMethods();
