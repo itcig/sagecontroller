@@ -71,7 +71,7 @@ class Loader
 	 */
 	protected function setPath()
 	{
-		$this->path = get_theme_file_path() . '/' . strtolower(str_replace('\\', '/', $this->namespace));
+		$this->path = get_theme_file_path() . '/' . str_replace('\\', '/', $this->namespace);
 	}
 
 	/**
