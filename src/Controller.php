@@ -19,7 +19,7 @@ class Controller
 	private $methods;
 	private $dataMethods;
 	private $staticMethods;
-	private $data = [];
+	protected $data = [];
 
 	// Loader
 	private $incomingData;
@@ -241,8 +241,14 @@ class Controller
 	final private function __setDatafromModuleAcf()
 	{
 		if ($this->acf) {
-			// Fetch current page Acf data and merge with $this->data
-			$this->data = array_merge($this->data, Acf::getModuleData($this->acf));
+			if ($this->class->getShortName() === 'App') {
+				// Fetch current page Acf data and merge with $this->data, include $options from Acf
+				$this->data = array_merge($this->data, Acf::getModuleData($this->acf, TRUE));
+			}
+			else {
+				// Fetch current page Acf data and merge with $this->data
+				$this->data = array_merge($this->data, Acf::getModuleData($this->acf, FALSE));
+			}
 		}
 	}
 
