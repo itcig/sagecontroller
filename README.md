@@ -11,7 +11,7 @@ WordPress package to enable a controller when using Timber/Twig with [Sage 9](ht
 Browse into the Sage theme directory and run;
 
 ```shell
-$ composer require itcig/sagecontroller:9.0.0-beta.4
+$ composer require itcig/sagecontroller:2.0.2
 ```
 
 #### Requirements:
@@ -20,13 +20,13 @@ $ composer require itcig/sagecontroller:9.0.0-beta.4
 
 ## Setup
 
-By default, create folder `app/controllers/` within your theme directory.
+By default, create folder `app/Controllers/` within your theme directory.
 
-Alternatively, you can define a custom path using the filter below within your themes `functions.php` file;
+Alternatively, you can define a custom path using the filter below within your themes `resources/functions.php` file;
 ```php
 
 add_filter('sober/controller/path', function () {
-    return dirname(get_template_directory()) . '/app/custom-folder';
+    return dirname(get_template_directory()) . '/app/Custom-folder';
 });
 ```
 
@@ -196,13 +196,13 @@ class Single extends Controller
 }
 ```
 
-You can override a `app/controllers/Singular.php` method by declaring the same method name in `app/controllers/Single.php`;
+You can override a `app/Controllers/Singular.php` method by declaring the same method name in `app/Controllers/Single.php`;
 
 #### Creating Global Properties;
 
-Methods created in `app/controllers/App.php` will be inherited by all views and can not be disabled as `resources/views/layouts/app.php` extends all views.
+Methods created in `app/Controllers/App.php` will be inherited by all views and can not be disabled as `resources/views/layouts/app.php` extends all views.
 
-**app/controllers/App.php**
+**app/Controllers/App.php**
 
 ```php
 <?php
@@ -228,18 +228,11 @@ protected $active = false;
 
 #### Twig Debugging;
 Coming soon
-<!--
-In your Blade views, `resources/views`, you can use the following to assist with debugging;
-
-* `@debug('hierarchy')` echos a list of the controller hierarchy for the current view.
-* `@debug('controller')` echos a list of variables available in the view.
-* `@debug('dump')` var_dumps a list of variables available in the view, including `$post`.
--->
 ## Updates
 
 #### Composer:
 
-* Change the composer.json version to ^9.0.0-beta3
+* Change the composer.json version to ^2.0.2
 * Check [CHANGELOG.md](CHANGELOG.md) for any breaking changes before updating.
 
 ```shell
