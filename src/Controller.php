@@ -105,7 +105,7 @@ class Controller
 	 *
 	 * Set this->template using the class short name converted to kebab case
 	 */
-	final private function __setTemplateParam()
+    private function __setTemplateParam()
 	{
 		if (!$this->template) {
 			$this->template = Utils::convertToKebabCase($this->class->getShortName());
@@ -117,7 +117,7 @@ class Controller
 	 *
 	 * Set $this->tree if the class has used the Tree interface
 	 */
-	final private function __setTreeParam()
+    private function __setTreeParam()
 	{
 		if ($this->class->implementsInterface('\Cig\Sage\Controller\Module\Tree')) {
 			$this->tree = true;
@@ -129,7 +129,7 @@ class Controller
 	 *
 	 * Set $this->methods with all public methods
 	 */
-	final private function __setPublicMethods()
+    private function __setPublicMethods()
 	{
 		// Get all public methods from class
 		$this->methods = $this->class->getMethods(\ReflectionMethod::IS_PUBLIC);
@@ -140,7 +140,7 @@ class Controller
 	 *
 	 * Remove internal class methods from $this->methods
 	 */
-	final private function __removeInternalMethods()
+    private function __removeInternalMethods()
 	{
 		// Remove Controller methods from $this->methods
 		$this->methods = array_filter($this->methods, function ($method) {
@@ -158,7 +158,7 @@ class Controller
 	 *
 	 * Set $this->staticMethods with public static methods
 	 */
-	final private function __setStaticMethods()
+    private function __setStaticMethods()
 	{
 		// Get all public static methods from class
 		$this->staticMethods = $this->class->getMethods(\ReflectionMethod::IS_STATIC);
@@ -169,7 +169,7 @@ class Controller
 	 *
 	 * For each method convert method name to snake case and add method to data[key => value]
 	 */
-	final private function __setDataFromStaticMethods()
+	private function __setDataFromStaticMethods()
 	{
 		foreach ($this->staticMethods as $method) {
 			// Convert method name to snake case
@@ -185,7 +185,7 @@ class Controller
 	 *
 	 * Set $this->dataMethods with public non-static methods
 	 */
-	final private function __setDataMethods()
+	private function __setDataMethods()
 	{
 		// Remove $this->staticMethods from $this->methods using array_diff
 		$this->dataMethods = array_diff($this->methods, $this->staticMethods);
@@ -201,7 +201,7 @@ class Controller
 	 *
 	 * For each method convert method name to snake case and add to data[key => value]
 	 */
-	final private function __setDataFromDataMethods()
+	private function __setDataFromDataMethods()
 	{
 		foreach ($this->dataMethods as $method) {
 			// Convert method name to snake case
@@ -217,7 +217,7 @@ class Controller
 	 *
 	 * Set the WordPress post
 	 */
-	final private function __setDataFromPost()
+	private function __setDataFromPost()
 	{
 		// Only set data from $post to App class
 		if ($this->template !== 'app') {
@@ -238,7 +238,7 @@ class Controller
 	 *
 	 * Set the Advanced Custom Fields data automatically
 	 */
-	final private function __setDatafromModuleAcf()
+	private function __setDatafromModuleAcf()
 	{
 		if ($this->acf) {
 			if ($this->class->getShortName() === 'App') {
@@ -257,7 +257,7 @@ class Controller
 	 *
 	 * Update $this->data with __debugger
 	 */
-	final private function __setDebuggerData()
+	private function __setDebuggerData()
 	{
 		// Get the data
 		$debuggerData = $this->data;
@@ -295,7 +295,7 @@ class Controller
 	 *
 	 * Update $this->data with __app
 	 */
-	final private function __setAppData()
+	private function __setAppData()
 	{
 		if ($this->template === 'app') {
 			// Save the app data in $this->data['__app']
@@ -316,7 +316,7 @@ class Controller
 	 *
 	 * Update $this->data with tree data if required and store existing data
 	 */
-	final private function __setTreeData()
+	private function __setTreeData()
 	{
 		if ($this->tree) {
 			// Include existing data with this Controller data
