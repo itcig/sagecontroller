@@ -1,6 +1,6 @@
 {
   "name": "itcig/sagecontroller",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "type": "package",
   "license": "MIT",
   "description": "WordPress package to enable a basic controller when using Timber/Twig with Sage 9",
