@@ -60,7 +60,7 @@ class Loader
 	protected function setNamespace()
 	{
 		$this->namespace = (has_filter('sage/controller/namespace')
-			? apply_filters('sage/controller/namespace', rtrim($this->namespace))
+			? apply_filters('sage/controller/namespace', rtrim($this->namespace ?? ''))
 			: 'App\Controllers');
 	}
 
